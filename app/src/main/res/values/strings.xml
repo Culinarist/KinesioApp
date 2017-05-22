@@ -10,6 +10,10 @@
         <item>Uranus</item>
         <item>Neptune</item>
     </string-array>
+
+    <string name="favorites">Suosikit</string>
+    <string name="lastviewed">Viimeksi katsotut</string>
+
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
