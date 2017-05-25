@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
@@ -15,42 +14,36 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TableLayout;
+
+import butterknife.BindArray;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DrawerLayout drawerLayout;
-    private ListView drawerList;
+    @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
+    @BindView(R.id.left_drawer) ListView drawerList;
+    @BindArray(R.array.menu_array) String[] titles;
+
     private ActionBarDrawerToggle drawerToggle;
 
-    /* This is for the frontpage tab */
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
 
     private CharSequence drawerTitle;
     private CharSequence title;
-    private String[] titles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         title = drawerTitle = getTitle();
-        titles = getResources().getStringArray(R.array.menu_array);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerList = (ListView) findViewById(R.id.left_drawer);
 
-        /* initialize frontpage tab */
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(viewPager);
 
         // set a custom shadow that overlays the main content when the drawer opens
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
-        drawerList.setAdapter(new ArrayAdapter<>(this,
-                R.layout.drawer_list_item, titles));
+        drawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, titles));
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
@@ -128,19 +121,6 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(this.title);
         }
     }
-
-    private class PagerAdapter extends FragmentPagerAdapter {
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case ITEM_ONE:
-                    return "Item One";
-                case ITEM_TWO:
-                    return "Item Two";
-            }
-        }
-    }
-
 
     /**
      * When using the ActionBarDrawerToggle, you must call it during
