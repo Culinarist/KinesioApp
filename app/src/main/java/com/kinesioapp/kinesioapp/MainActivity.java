@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     @BindArray(R.array.menu_array) String[] titles;
 
     private ActionBarDrawerToggle drawerToggle;
+
+
     private CharSequence drawerTitle;
     private CharSequence title;
 
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         title = drawerTitle = getTitle();
+
 
         // set a custom shadow that overlays the main content when the drawer opens
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
