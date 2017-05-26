@@ -4,10 +4,12 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,11 +23,10 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.left_drawer) ListView drawerList;
+    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindArray(R.array.menu_array) String[] titles;
 
     private ActionBarDrawerToggle drawerToggle;
-
-
     private CharSequence drawerTitle;
     private CharSequence title;
 
@@ -35,20 +36,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        title = drawerTitle = getTitle();
+        setupDrawerLayout();
 
-
-        // set a custom shadow that overlays the main content when the drawer opens
-        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        // set up the drawer's list view with items and click listener
-        drawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, titles));
-        drawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        // enable ActionBar app icon to behave as action to toggle nav drawer
+        // setup ActionBar
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
         }
+
+        if (savedInstanceState == null) {
+            selectItem(0);
+        }
+    }
+
+    private void setupDrawerLayout() {
+        title = drawerTitle = getTitle();
+
+        // set a custom shadow that overlays the main content when the drawer opens
+        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        drawerLayout.setStatusBarBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        // set up the drawer's list view with items and click listener
+        drawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, titles));
+        drawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the sliding drawer and the action bar app icon
@@ -73,10 +83,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         drawerLayout.addDrawerListener(drawerToggle);
-
-        if (savedInstanceState == null) {
-            selectItem(0);
-        }
     }
 
     /* The click listner for ListView in the navigation drawer */
@@ -100,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
             args.putInt(InjuriesFragment.INJURY_NUMBER, position);
             fragment.setArguments(args);
         }
-
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getFragmentManager();
