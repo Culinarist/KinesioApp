@@ -40,7 +40,7 @@ public class FrontPageFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
-        viewPager.setAdapter(new TabViewPagerAdapter(getChildFragmentManager()));
+        viewPager.setAdapter(new TabViewPagerAdapter(getChildFragmentManager(), view.getContext()));
 
         // Give the TabLayout the ViewPager
         tabLayout.setupWithViewPager(viewPager);
