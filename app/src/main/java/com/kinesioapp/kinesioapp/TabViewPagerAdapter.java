@@ -2,13 +2,18 @@ package com.kinesioapp.kinesioapp;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 
 public class TabViewPagerAdapter extends FragmentPagerAdapter {
 
-    public TabViewPagerAdapter(FragmentManager fm) {
+    private Context context;
+
+
+    public TabViewPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
+        this.context = context;
     }
 
     @Override
@@ -27,11 +32,11 @@ public class TabViewPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public CharSequence getPageTitle(int position) {
+    public String getPageTitle(int position) {
         if (position == 0) {
-            return "Favorites";
+            return context.getResources().getString(R.string.favorites);
         } else {
-            return "Recent";
+            return context.getResources().getString(R.string.last_viewed);
         }
     }
 }
