@@ -2,6 +2,7 @@ package com.kinesioapp.kinesioapp;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import butterknife.BindArray;
 import butterknife.BindView;
@@ -99,17 +101,22 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment;
         Bundle args = new Bundle();
 
+        // Create fragment manager
+        FragmentManager fragmentManager = getFragmentManager();
+
         if (position == 0) {
             fragment = new FrontPageFragment();
+
+            // Insert the fragment by replacing any existing fragment
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         } else {
             fragment = new InjuriesFragment();
             args.putInt(InjuriesFragment.INJURY_NUMBER, position);
             fragment.setArguments(args);
-        }
 
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            // Insert the fragment by replacing any existing fragment and also add fragment to back stack
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+        }
 
         // Highlight the selected item, update the title, and close the drawer
         drawerList.setItemChecked(position, true);
@@ -146,6 +153,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         return drawerToggle.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+
     }
 
 }
