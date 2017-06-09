@@ -2,7 +2,6 @@ package com.kinesioapp.kinesioapp;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -14,8 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import butterknife.BindArray;
 import butterknife.BindView;
@@ -25,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.left_drawer) ListView drawerList;
+    @BindView(R.id.drawer_content_layout) LinearLayout drawerContent;
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindArray(R.array.menu_array) String[] titles;
 
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(drawerToggle);
     }
 
-    /* The click listner for ListView in the navigation drawer */
+    /* The click listener for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         // Highlight the selected item, update the title, and close the drawer
         drawerList.setItemChecked(position, true);
         setTitle(titles[position]);
-        drawerLayout.closeDrawer(drawerList);
+        drawerLayout.closeDrawer(drawerContent);
     }
 
     @Override
@@ -157,15 +157,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         int count = getFragmentManager().getBackStackEntryCount();
-
         if (count == 0) {
             super.onBackPressed();
         } else {
             getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
-
     }
-
 }

@@ -1,13 +1,15 @@
 <?xml version="1.0"?>
 
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/text1"
+    android:id="@+id/list_item_text_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/activatedBackgroundIndicator"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
     android:textColor="@android:color/black" />
+
+<!-- Jos halutaan, että tausta muuttuu valitussa itemissä
+android:background="?android:attr/activatedBackgroundIndicator" -->
