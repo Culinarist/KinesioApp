@@ -1,9 +1,24 @@
 <?xml version="1.0"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/image"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#000000"
-    android:gravity="center"
-    android:padding="32dp" />
+    <ToggleButton
+        android:id="@+id/favoriteButtonId"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        style="@style/favoriteToggleButton"
+        android:background="@drawable/ic_favorite_toggle_bg"
+        android:layout_gravity="right" />
+
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:gravity="center"
+        android:padding="32dp" />
+    
+</LinearLayout>
