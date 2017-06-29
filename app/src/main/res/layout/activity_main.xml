@@ -4,13 +4,12 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:fitsSystemWindows="true"
         >
 
         <!-- We use a Toolbar so that our drawer can be displayed in front of the action bar -->
@@ -18,8 +17,9 @@
             android:id="@+id/toolbar"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            app:titleTextColor="@color/white"
+            app:titleTextColor="@color/absoluteWhite"
             android:background="@color/colorPrimary"
+            android:fitsSystemWindows="true"
             />
 
         <!-- The rest of the content view -->

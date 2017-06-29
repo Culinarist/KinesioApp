@@ -1,7 +1,6 @@
 package com.kinesioapp.kinesioapp;
 
 import android.content.Context;
-import android.graphics.ColorFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +58,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
+    public View getGroupView(int i, boolean isExpanded, View view, ViewGroup viewGroup) {
         String headerTitle = (String)getGroup(i);
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -67,10 +66,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         TextView drawerGroupItem = (TextView) view.findViewById(R.id.drawer_group_item);
         drawerGroupItem.setText(headerTitle);
-        ImageView indicator = (ImageView) view.findViewById(R.id.indicator);
-        if (getChildrenCount(i) != 0) {
-            indicator.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
-        }
+
+        setIndicator(view, isExpanded, getChildrenCount(i));
+
         return view;
     }
 
@@ -90,5 +88,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int i, int i1) {
         return true;
+    }
+
+    public void setIndicator(View view, boolean expanded, int childrenCount) {
+        ImageView indicator = (ImageView) view.findViewById(R.id.indicator);
+        if (childrenCount == 0) {
+            indicator.setVisibility(View.GONE);
+        }
+        indicator.setImageResource(expanded ? R.drawable.ic_keyboard_arrow_up_black_24dp : R.drawable.ic_keyboard_arrow_down_black_24dp);
     }
 }

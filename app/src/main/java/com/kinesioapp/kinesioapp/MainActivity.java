@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
             public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
                 if (listAdapter.getChildrenCount(i) == 0) {
                     selectItem(i, 0);
+                } else {
+                    listAdapter.setIndicator(view, expandableListView.isGroupExpanded(i), listAdapter.getChildrenCount(i));
                 }
                 return false;
             }
@@ -89,22 +91,13 @@ public class MainActivity extends AppCompatActivity {
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the sliding drawer and the action bar app icon
-        drawerToggle = new ActionBarDrawerToggle(
-                this,
-                drawerLayout,
-                R.string.drawer_open,
-                R.string.drawer_close
-        ) {
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
             public void onDrawerClosed(View view) {
                 if (getSupportActionBar() != null) {
                     getSupportActionBar().setTitle(currentTitle);
                 }
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle(drawerTitle);
+                for (int i = 0; i < drawerList.getCount(); i++) {
+                    drawerList.collapseGroup(i);
                 }
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
