@@ -4,16 +4,18 @@
     android:id="@+id/drawer_list_group"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
     <ImageView
+        android:id="@+id/group_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
         android:src="@drawable/ic_star_border_black_24dp"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/imageView" />
+        />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/drawer_group_item"
@@ -24,9 +26,10 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="@color/charcoalGray"
+        android:textColor="@color/charcoal_gray"
         tools:text="Group title"
-        android:layout_toEndOf="@+id/imageView" />
+        android:layout_toEndOf="@+id/group_icon"
+        />
 
     <ImageView
         android:id="@+id/indicator"

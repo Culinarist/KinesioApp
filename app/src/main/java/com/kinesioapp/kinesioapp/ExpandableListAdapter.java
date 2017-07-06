@@ -66,20 +66,18 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         TextView drawerGroupItem = (TextView) view.findViewById(R.id.drawer_group_item);
         drawerGroupItem.setText(headerTitle);
-
         setIndicator(view, isExpanded, getChildrenCount(i));
-
+        setGroupIconIfNotSet((ImageView) view.findViewById(R.id.group_icon), i);
         return view;
     }
 
     @Override
-    public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
+    public View getChildView(int i, int i1, boolean isExpanded, View view, ViewGroup viewGroup) {
         final String childText = (String)getChild(i,i1);
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.drawer_child_item,null);
         }
-
         TextView drawerChildItem = (TextView) view.findViewById(R.id.drawer_child_item);
         drawerChildItem.setText(childText);
         return view;
@@ -90,11 +88,18 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
-    public void setIndicator(View view, boolean expanded, int childrenCount) {
+    private void setIndicator(View view, boolean expanded, int childrenCount) {
         ImageView indicator = (ImageView) view.findViewById(R.id.indicator);
-        if (childrenCount == 0) {
-            indicator.setVisibility(View.GONE);
-        }
+        indicator.setVisibility(childrenCount == 0 ? View.INVISIBLE : View.VISIBLE);
         indicator.setImageResource(expanded ? R.drawable.ic_keyboard_arrow_up_black_24dp : R.drawable.ic_keyboard_arrow_down_black_24dp);
+    }
+
+    private void setGroupIconIfNotSet(ImageView groupIcon, int i) {
+        //TODO: check if already set
+        if (i == 0) {
+            groupIcon.setImageResource(R.drawable.ic_home_black_24dp);
+        } else {
+            groupIcon.setImageResource(R.drawable.ic_star_border_black_24dp);
+        }
     }
 }
