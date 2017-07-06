@@ -62,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
             public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
                 if (listAdapter.getChildrenCount(i) == 0) {
                     selectItem(i, 0);
-                } else {
-                    listAdapter.setIndicator(view, expandableListView.isGroupExpanded(i), listAdapter.getChildrenCount(i));
                 }
                 return false;
             }
@@ -86,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         currentTitle = drawerTitle = getTitle();
 
         // set a custom shadow that overlays the main content when the drawer opens
-        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         drawerLayout.setStatusBarBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
 
         // ActionBarDrawerToggle ties together the the proper interactions
@@ -189,11 +186,11 @@ public class MainActivity extends AppCompatActivity {
         List<String> empty = new ArrayList<>();
 
         listHash.put(listDataHeader.get(0),empty);
-        listHash.put(listDataHeader.get(1),empty);
-        listHash.put(listDataHeader.get(2),empty);
+        listHash.put(listDataHeader.get(1),uwp);
+        listHash.put(listDataHeader.get(2),androidStudio);
         listHash.put(listDataHeader.get(3),empty);
         listHash.put(listDataHeader.get(4),androidStudio);
-        listHash.put(listDataHeader.get(5),xamarin);
+        listHash.put(listDataHeader.get(5),empty);
         listHash.put(listDataHeader.get(6),uwp);
         listHash.put(listDataHeader.get(7),edmtDev);
     }

@@ -9,7 +9,7 @@
     android:paddingLeft="66dp"
     android:paddingRight="16dp"
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:textColor="@color/charcoalGray"
+    android:textColor="@color/charcoal_gray"
     />
 
 <!-- Jos halutaan, että tausta muuttuu valitussa itemissä

@@ -3,7 +3,8 @@
     android:id="@+id/drawer_content_layout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -11,7 +12,8 @@
         android:background="@color/colorPrimary"
         android:padding="16dp"
         android:gravity="bottom"
-        android:elevation="8dp">
+        android:elevation="8dp"
+        >
 
         <ImageView
             android:id="@+id/app_icon_image_view"
@@ -30,7 +32,8 @@
             android:textColor="@color/absoluteWhite"
             android:layout_below="@+id/app_icon_image_view"
             android:layout_marginTop="16dp"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            />
 
     </RelativeLayout>
 
